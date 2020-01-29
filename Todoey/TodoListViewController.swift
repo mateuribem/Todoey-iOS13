@@ -15,7 +15,35 @@ class TodoListViewController: UITableViewController {
     var itemArray = [
     "Find Mike",
     "Buy Eggos",
-    "Destroy Demogorgon"
+    "Destroy Demogorgon",
+    "a",
+    "B",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "J",
+    "K",
+    "L",
+    "M",
+    "n",
+    "a",
+    "B",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "J",
+    "K",
+    "L",
+    "M",
+    "n"
     ]
     
     
