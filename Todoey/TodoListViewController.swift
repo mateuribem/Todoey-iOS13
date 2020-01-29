@@ -10,6 +10,8 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
+    let defaults = UserDefaults.standard
+    
     var itemArray = [
     "Find Mike",
     "Buy Eggos",
@@ -21,6 +23,10 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        if let items = defaults.array(forKey: K.todoArrayUserDefaultKey) as? [String] {
+            itemArray = items
+        }
     }
 
     
@@ -65,6 +71,7 @@ class TodoListViewController: UITableViewController {
             //What will happen when the user click
             if textField.text != "" {
                 self.itemArray.append(textField.text!)
+                self.defaults.set(self.itemArray, forKey: K.todoArrayUserDefaultKey)
             } else {
                 print("No text entered")
             }
