@@ -12,39 +12,7 @@ class TodoListViewController: UITableViewController {
     
     let defaults = UserDefaults.standard
     
-    var itemArray = [
-    "Find Mike",
-    "Buy Eggos",
-    "Destroy Demogorgon",
-    "a",
-    "B",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "J",
-    "K",
-    "L",
-    "M",
-    "n",
-    "a",
-    "B",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "J",
-    "K",
-    "L",
-    "M",
-    "n"
-    ]
+    var itemArray = [Item]()
     
     
 
@@ -52,9 +20,25 @@ class TodoListViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        if let items = defaults.array(forKey: K.todoArrayUserDefaultKey) as? [String] {
-            itemArray = items
-        }
+        let newItem = Item()
+        newItem.title = "Find Mike"
+        itemArray.append(newItem)
+        
+        let newItem2 = Item()
+        newItem2.title = "Buy eggo"
+        itemArray.append(newItem2)
+        
+        let newItem3 = Item()
+        newItem3.title = "run marathon"
+        itemArray.append(newItem3)
+        
+        let newItem4 = Item()
+        newItem4.title = "fight mordor"
+        itemArray.append(newItem4)
+        
+//        if let items = defaults.array(forKey: K.todoArrayUserDefaultKey) as? [String] {
+//            itemArray = items
+//        }
     }
 
     
@@ -66,7 +50,7 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = itemArray[indexPath.row]
+        cell.textLabel?.text = itemArray[indexPath.row].title
         return cell
     }
     
@@ -98,7 +82,9 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             //What will happen when the user click
             if textField.text != "" {
-                self.itemArray.append(textField.text!)
+                let newItem = Item()
+                newItem.title = textField.text!
+                self.itemArray.append(newItem)
                 self.defaults.set(self.itemArray, forKey: K.todoArrayUserDefaultKey)
             } else {
                 print("No text entered")
