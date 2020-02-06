@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 class CategoryTableViewController: UITableViewController {
+    
+    let realm = try! Realm()
     
     var categoryArray = [Category]()
     
@@ -32,10 +35,10 @@ class CategoryTableViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
             
             if textField.text != "" {
-                let newCategory = Category(context: self.context)
+                let newCategory = Category()
                 newCategory.name = textField.text!
                 self.categoryArray.append(newCategory)
-                self.saveItems()
+                self.save(category: newCategory)
                 
             } else {
                 print("No text entered")
@@ -83,9 +86,11 @@ extension CategoryTableViewController {
     
     //MARK: - Data Manipulation Methods
     
-    func saveItems() {
+    func save(category: Category) {
                       do {
-                        try context.save()
+                        try realm.write {
+                            realm.add(category)
+                        }
                     
                       } catch {
                           print("error saving context")
